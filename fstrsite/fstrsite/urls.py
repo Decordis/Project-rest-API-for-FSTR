@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from tbase.views import PointAddAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/pointaddlist/', PointAddAPIView())
 ]

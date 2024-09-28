@@ -1,7 +1,7 @@
 from django.contrib import admin
+from .models import Users, PointAdd
 
+admin.site.register(PointAdd)
+admin.site.register(Users)
 
-# admin.site.register(Category)
-# admin.site.register(Post)
-# admin.site.register(PostCategory)
 # # Register your models here.

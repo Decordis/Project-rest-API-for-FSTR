@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'tbase.apps.TbaseConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -90,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tbase',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'PASSWORD': '1825',
         'HOST': 'localhost',
         'PORT': '5432',
     }
