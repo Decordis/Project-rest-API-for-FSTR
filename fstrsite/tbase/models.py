@@ -51,7 +51,6 @@ class PointAdd(models.Model):
         ('3A', '3A'),
         ('3Б', '3Б'),
     )
-
     beauty_title = models.CharField(max_length=250,)
     title = models.CharField(max_length=250, unique=True)
     other_titles = models.CharField(max_length=250, unique=True)
