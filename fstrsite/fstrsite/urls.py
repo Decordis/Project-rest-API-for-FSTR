@@ -20,5 +20,5 @@ from tbase.views import PointAddAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/pointaddlist/', PointAddAPIView())
+    path('api/v1/pointaddlist/', PointAddAPIView.as_view())
 ]
