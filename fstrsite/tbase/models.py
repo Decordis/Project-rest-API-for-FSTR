@@ -15,7 +15,7 @@ class Coord(models.Model):
 
 class Image(models.Model):
     title = models.CharField()
-    img = models.ImageField()
+    img = models.ImageField(default='static/images/70586.jgp')
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
