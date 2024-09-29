@@ -17,10 +17,10 @@ class Image(models.Model):
     title = models.CharField()
     img = models.ImageField(default='static/images/70586.jgp')
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        with open('static/images', 'rb') as p:
-            self.img.save(p)
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
+    #     with open('static/images', 'rb') as p:
+    #         self.img.save(p)
 
 
 class PointAdd(models.Model):

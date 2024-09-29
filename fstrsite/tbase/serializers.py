@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import PointAdd
+from .models import PointAdd, Image, Users
 
 
 class PointAddSerializer(serializers.ModelSerializer):
@@ -20,3 +20,20 @@ class PointAddSerializer(serializers.ModelSerializer):
             'summer_level',
             'autumn_level',
         )
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        photo_img = serializers.URLField()
+
+
+class UsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields = (
+            'full_name',
+            'email',
+            'phone',
+        )
+
