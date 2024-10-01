@@ -45,8 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'tbase.apps.TbaseConfig',
-    'rest_framework',
     'django_filters',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -148,6 +148,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
-        'django_filters.rest_framework.DjangoFilterBackend'
+        'django_filters.rest_framework.DjangoFilterBackend',
     )
 }

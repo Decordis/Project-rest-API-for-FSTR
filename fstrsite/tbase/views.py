@@ -7,6 +7,7 @@ from .serializers import PointAddSerializer, ImageSerializer, UsersSerializer, C
 class PointAddAPIView(viewsets.ModelViewSet):
     queryset = PointAdd.objects.all()
     serializer_class = PointAddSerializer
+    filterset_fields = ('user_id__email', )
 
 
 class ImageAPIView(viewsets.ModelViewSet):
