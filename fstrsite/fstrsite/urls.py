@@ -16,15 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from tbase.views import PointAddAPIView, UsersAPIView, ImageAPIView, LevelAPIView, CoordAPIView
+from tbase.views import PointAddAPIView
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'pointadd', PointAddAPIView)
-router.register(r'user', UsersAPIView)
-router.register(r'image', ImageAPIView)
-router.register(r'level', LevelAPIView)
-router.register(r'coord', CoordAPIView)
+router.register(r'submitdata', PointAddAPIView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
