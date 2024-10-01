@@ -8,14 +8,15 @@ class Users(models.Model):
 
 
 class Coord(models.Model):
-    latitude = models.DecimalField(max_digits=10, decimal_places=8)
-    longitude = models.DecimalField(max_digits=10, decimal_places=8)
-    height = models.IntegerField()
+    latitude = models.DecimalField(max_digits=10, decimal_places=8, unique=True)
+    longitude = models.DecimalField(max_digits=10, decimal_places=8, unique=True)
+    height = models.IntegerField(unique=True)
 
 
 class Image(models.Model):
     title = models.CharField()
-    img = models.ImageField(default='static/images/70586.jgp')
+    img = models.CharField()
+    # img = models.ImageField(default='static/images/70586.jgp')
 
     # def save(self, *args, **kwargs):
     #     super().save(*args, **kwargs)
@@ -23,19 +24,7 @@ class Image(models.Model):
     #         self.img.save(p)
 
 
-class PointAdd(models.Model):
-    NEW = 'NW'
-    PENDING = 'PN'
-    ACCEPTED = 'AC'
-    REJECTED = 'RJ'
-
-    STATUS_CHOICES = (
-        ('NW', 'New'),
-        ('AC', 'Accepted'),
-        ('PN', 'Pending'),
-        ('RJ', 'REJECTED'),
-    )
-
+class LevelPoint(models.Model):
     LEVEL_1A = '1A'
     LEVEL_1B = '1Б'
     LEVEL_2A = '1A'
@@ -52,6 +41,25 @@ class PointAdd(models.Model):
         ('3Б', '3Б'),
     )
 
+    winter_level = models.CharField(max_length=2, choices=LEVEL_CHOICES)
+    spring_level = models.CharField(max_length=2, choices=LEVEL_CHOICES)
+    summer_level = models.CharField(max_length=2, choices=LEVEL_CHOICES)
+    autumn_level = models.CharField(max_length=2, choices=LEVEL_CHOICES)
+
+
+class PointAdd(models.Model):
+    # NEW = 'NW'
+    # PENDING = 'PN'
+    # ACCEPTED = 'AC'
+    # REJECTED = 'RJ'
+    #
+    # STATUS_CHOICES = (
+    #     ('NW', 'New'),
+    #     ('AC', 'Accepted'),
+    #     ('PN', 'Pending'),
+    #     ('RJ', 'REJECTED'),
+    # )
+
     beauty_title = models.CharField(max_length=250,)
     title = models.CharField(max_length=250, unique=True)
     other_titles = models.CharField(max_length=250, unique=True)
@@ -60,10 +68,9 @@ class PointAdd(models.Model):
     coord_id = models.OneToOneField(Coord, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
     photo_img = models.OneToOneField(Image, on_delete=models.CASCADE)
-    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default=LEVEL_1A)
-    winter_level = models.CharField(max_length=2, choices=LEVEL_CHOICES, default=LEVEL_1A)
-    spring_level = models.CharField(max_length=2, choices=LEVEL_CHOICES, default=LEVEL_1A)
-    summer_level = models.CharField(max_length=2, choices=LEVEL_CHOICES, default=LEVEL_1A)
-    autumn_level = models.CharField(max_length=2, choices=LEVEL_CHOICES, default=LEVEL_1A)
+    # status = models.CharField(max_length=2, choices=STATUS_CHOICES)
+    level = models.ForeignKey(LevelPoint, on_delete=models.CASCADE)
+
+
 
 
