@@ -63,12 +63,10 @@ class PointAddSerializer(WritableNestedModelSerializer):
             'photo_img',
             'status',
         )
-    def validate_status(self, attrs):
+    def validate(self, attrs):
         if attrs.get('status') != 'NW':
             raise serializers.ValidationError("Вы не можете изменить данный пост.")
-        return attrs
 
-    def validate_email(self, value):
-        if value.get('user_id'):
+        if attrs.get('user_id'):
             raise serializers.ValidationError("Данный пользователь уже существует!.")
-        return value
+        return attrs
