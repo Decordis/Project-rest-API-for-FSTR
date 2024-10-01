@@ -61,4 +61,5 @@ class PointAddSerializer(WritableNestedModelSerializer):
             'user_id',
             'level',
             'photo_img',
+            'status',
         )
