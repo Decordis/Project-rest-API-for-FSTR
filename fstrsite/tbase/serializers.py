@@ -64,13 +64,12 @@ class PointAddSerializer(WritableNestedModelSerializer):
             'status',
         )
 
-    def update(self, instance, validated_data):
-        if instance.status != 'NW':
-            raise serializers.ValidationError("U can't change this is point.")
+    def validate_status(self, attrs):
+        if attrs.get('status') != 'NW':
+            raise serializers.ValidationError("Вы не можете изменить данный пост.")
+        return attrs
 
-        for attr, value in validated_data.items():
-            if attr not in ['full_name', 'email', 'phone', 'status']:
-                setattr(instance, attr, value)
-
-        instance.save()
-        return instance
+    def validate_email(self, value):
+        if value.get('user_id'):
+            raise serializers.ValidationError("Данный пользователь уже существует!.")
+        return value
