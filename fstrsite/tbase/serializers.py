@@ -63,3 +63,14 @@ class PointAddSerializer(WritableNestedModelSerializer):
             'photo_img',
             'status',
         )
+
+    def update(self, instance, validated_data):
+        if instance.status != 'NW':
+            raise serializers.ValidationError("U can't change this is point.")
+
+        for attr, value in validated_data.items():
+            if attr not in ['full_name', 'email', 'phone', 'status']:
+                setattr(instance, attr, value)
+
+        instance.save()
+        return instance
