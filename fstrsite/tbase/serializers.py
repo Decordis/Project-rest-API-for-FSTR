@@ -64,10 +64,23 @@ class PointAddSerializer(WritableNestedModelSerializer):
             'status',
         )
 
-    def validate(self, attrs):
-        if attrs.get('status') != 'NW':
-            raise serializers.ValidationError("Вы не можете изменить данный пост.")
+    def validate(self, data):
+        if self.instance is not None:
+            if self.instance.status != 'NW':
+                raise serializers.ValidationError(
+                    f'Отказ! Причина: статус {self.instance.get_status_display()}'
+                )
 
-        if attrs.get('user_id'):
-            raise serializers.ValidationError("Данный пользователь уже существует!.")
-        return attrs
+        user = self.instance.user_id
+        user_data = data.get('user_id')
+        user_fields = [
+            user.full_name != user_data['full_name'],
+            user.email != user_data['email'],
+            user.phone != user_data['phone'],
+        ]
+
+        if user_data is not None and any(user_fields):
+            raise serializers.ValidationError(
+                f'Отклонено! Нельзя менять данные пользователя'
+            )
+        return data
