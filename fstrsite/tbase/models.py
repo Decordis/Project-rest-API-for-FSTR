@@ -15,7 +15,7 @@ class Coord(models.Model):
 
 class Image(models.Model):
     title = models.CharField()
-    img = models.CharField()
+    img = models.ImageField(default='70586.jpg')
     # img = models.ImageField(default='static/images/70586.jgp')
 
     # def save(self, *args, **kwargs):
@@ -41,24 +41,24 @@ class LevelPoint(models.Model):
         ('3Б', '3Б'),
     )
 
-    winter_level = models.CharField(max_length=2, choices=LEVEL_CHOICES)
-    spring_level = models.CharField(max_length=2, choices=LEVEL_CHOICES)
-    summer_level = models.CharField(max_length=2, choices=LEVEL_CHOICES)
-    autumn_level = models.CharField(max_length=2, choices=LEVEL_CHOICES)
+    winter_level = models.CharField(max_length=2, choices=LEVEL_CHOICES, default=LEVEL_1A)
+    spring_level = models.CharField(max_length=2, choices=LEVEL_CHOICES, default=LEVEL_1A)
+    summer_level = models.CharField(max_length=2, choices=LEVEL_CHOICES, default=LEVEL_1A)
+    autumn_level = models.CharField(max_length=2, choices=LEVEL_CHOICES, default=LEVEL_1A)
 
 
 class PointAdd(models.Model):
-    # NEW = 'NW'
-    # PENDING = 'PN'
-    # ACCEPTED = 'AC'
-    # REJECTED = 'RJ'
-    #
-    # STATUS_CHOICES = (
-    #     ('NW', 'New'),
-    #     ('AC', 'Accepted'),
-    #     ('PN', 'Pending'),
-    #     ('RJ', 'REJECTED'),
-    # )
+    NEW = 'NW'
+    PENDING = 'PN'
+    ACCEPTED = 'AC'
+    REJECTED = 'RJ'
+
+    STATUS_CHOICES = (
+        ('NW', 'New'),
+        ('AC', 'Accepted'),
+        ('PN', 'Pending'),
+        ('RJ', 'REJECTED'),
+    )
 
     beauty_title = models.CharField(max_length=250,)
     title = models.CharField(max_length=250, unique=True)
@@ -68,7 +68,7 @@ class PointAdd(models.Model):
     coord_id = models.OneToOneField(Coord, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
     photo_img = models.OneToOneField(Image, on_delete=models.CASCADE)
-    # status = models.CharField(max_length=2, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default=NEW)
     level = models.ForeignKey(LevelPoint, on_delete=models.CASCADE)
 
 

@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from drf_writable_nested.serializers import WritableNestedModelSerializer
 from .models import PointAdd, Image, Users, Coord, LevelPoint
 
 
@@ -42,7 +43,7 @@ class ImageSerializer(serializers.ModelSerializer):
         )
 
 
-class PointAddSerializer(serializers.ModelSerializer):
+class PointAddSerializer(WritableNestedModelSerializer):
     user_id = UsersSerializer()
     coord_id = CoordSerializer()
     level = LevelPointSerializer()
