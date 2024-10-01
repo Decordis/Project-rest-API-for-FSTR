@@ -63,7 +63,6 @@ class PointAddSerializer(WritableNestedModelSerializer):
             'photo_img',
             'status',
         )
-
     def validate_status(self, attrs):
         if attrs.get('status') != 'NW':
             raise serializers.ValidationError("Вы не можете изменить данный пост.")
